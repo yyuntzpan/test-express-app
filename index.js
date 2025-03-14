@@ -12,13 +12,12 @@ const dbConfig = {
   database: process.env.DB_NAME,
   port: process.env.DB_PORT,
 };
+const pool = mysql.createPool(dbConfig);
 
 // 測試資料庫連接的路由
 app.get("/api/test-db", async (req, res) => {
-  let connection;
   try {
-    connection = await mysql.createConnection(dbConfig);
-    await connection.query("SELECT 1");
+    const [rows] = await pool.query("SELECT 1");
     res.json({ success: true, message: "資料庫連接成功！" });
   } catch (error) {
     console.error("資料庫連接錯誤:", error);
@@ -40,11 +39,9 @@ app.get("/", (req, res) => {
 });
 
 app.get("/test", async (req, res) => {
-  let connection;
   try {
-    connection = await mysql.createConnection(dbConfig);
     const sql = "SELECT * FROM Gyms WHERE gym_id = 1";
-    const [rows] = await connection.query(sql);
+    const [rows] = await pool.query(sql);
     res.json(rows);
   } catch (error) {
     console.error("查詢錯誤:", error);
