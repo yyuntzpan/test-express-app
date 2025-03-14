@@ -39,6 +39,16 @@ app.get("/", (req, res) => {
   res.send("Express 應用程式運行中！訪問 /api/test-db 來測試資料庫連接");
 });
 
+app.get("/gyms", async (req, res) => {
+  let data = "";
+  try {
+    data = await getFullGymData(req);
+  } catch (error) {
+    console.error("Route error:", error);
+    data = { success: false, error: "Internal Server Error" };
+  }
+  res.json(data);
+});
 // 啟動服務器
 app.listen(port, () => {
   console.log(`服務器運行在 http://localhost:${port}`);
