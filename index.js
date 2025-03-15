@@ -40,7 +40,6 @@ app.get("/", (req, res) => {
 // 啟動服務器
 async function startServer() {
   try {
-    await getPool();
 
     app.listen(port, () => {
       console.log(`服務器運行在 http://localhost:${port}`);
