@@ -25,11 +25,7 @@ app.get("/api/test-db", async (req, res) => {
       message: "資料庫連接失敗",
       error: error.message,
     });
-  } finally {
-    if (connection) {
-      await connection.end();
-    }
-  }
+  } 
 });
 
 // 簡單的首頁路由

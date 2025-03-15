@@ -1,4 +1,7 @@
+import dotenv from "dotenv";
 import mysql from "mysql2/promise";
+
+dotenv.config();
 
 const { DB_HOST, DB_USER, DB_PASS, DB_NAME, DB_PORT } = process.env;
 
@@ -27,5 +30,6 @@ const getPool = async () => {
     throw err; // 重新拋出錯誤以便調用者處理
   }
 };
+
 
 export default getPool;
