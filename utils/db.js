@@ -6,11 +6,11 @@ dotenv.config();
 const { DB_HOST, DB_USER, DB_PASS, DB_NAME, DB_PORT } = process.env;
 
 let pool = null;
-const getPool = async () => {
+const getPool =  () => {
   if (pool) return pool;
 
   try {
-    pool = await mysql.createPool({
+    pool =  mysql.createPool({
       host: DB_HOST,
       user: DB_USER,
       password: DB_PASS,
